@@ -149,6 +149,31 @@ MonoBehaviour:
   DepthMovementSpeed: -0.025
   health: 1
   ScaleUpTime: 1
+  PointsDistanceMapping:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1.9332159
+      outSlope: -2.1420262
+      tangentMode: 1
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.17375888
+    - serializedVersion: 3
+      time: 0.99645996
+      value: 0.12604904
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxPoints: 1000
 --- !u!54 &1602792941492879040
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class CircularObject : MonoBehaviour
 
     [SerializeField, Tooltip("Meter per second")] 
     protected float DepthMovementSpeed = 0;
+
+    const float AutoKillDistance = 1000;
     
     protected void RotateCCW()
     {
@@ -23,6 +25,9 @@ public class CircularObject : MonoBehaviour
     protected virtual void Update() 
     {
         transform.position += Vector3.forward * DepthMovementSpeed;
+
+        if (transform.position.z >= AutoKillDistance || transform.position.z <= -AutoKillDistance)
+            Destroy(gameObject);
     }
 
 }

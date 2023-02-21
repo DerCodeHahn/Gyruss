@@ -6,8 +6,11 @@ using DG.Tweening;
 
 public class Enemy : CircularObject
 {
-    [SerializeField] float health;
+
+    [SerializeField, Header("Enemy spezific")] float health;
     [SerializeField] float ScaleUpTime = 0.5f;
+    [SerializeField] AnimationCurve PointsDistanceMapping;
+    [SerializeField] int MaxPoints = 1000;
 
     private void Awake()
     {
@@ -23,9 +26,22 @@ public class Enemy : CircularObject
         {
             health -= shot.Damage;
             if (health <= 0)
-                Destroy(gameObject);
+                KillEnemy();
+            
             Destroy(shot.gameObject);
         }
+    }
+
+    void KillEnemy()
+    {
+        Destroy(gameObject);
+
+        float amountTraveld =  transform.position.z / transform.parent.position.z;
+        float currentPoints = PointsDistanceMapping.Evaluate(1-amountTraveld) * MaxPoints;
+
+        //Debug.Log($"Killed at Distance {amountTraveld} Got {currentPoints} Points");
+        
+        ScoreManager.Instance.AddScore(currentPoints);
     }
 
     protected override void Update()
