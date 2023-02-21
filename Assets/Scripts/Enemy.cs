@@ -14,6 +14,7 @@ public class Enemy : CircularObject
 
     private void Awake()
     {
+        base.Awake();
         transform.localScale = Vector3.zero;
         transform.DOScale(Vector3.one, ScaleUpTime);
     }
@@ -40,14 +41,15 @@ public class Enemy : CircularObject
         float currentPoints = PointsDistanceMapping.Evaluate(1-amountTraveld) * MaxPoints;
 
         //Debug.Log($"Killed at Distance {amountTraveld} Got {currentPoints} Points");
-        
+
         ScoreManager.Instance.AddScore(currentPoints);
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
         RotateCCW();
+        base.FixedUpdate();
+        
     }
 
     private void OnDestroy()

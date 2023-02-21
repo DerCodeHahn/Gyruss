@@ -9,6 +9,4 @@ public class Shot : CircularObject
 
     public float Damage { get => damage; }
 
-
-
 }

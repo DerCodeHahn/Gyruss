@@ -11,20 +11,25 @@ public class CircularObject : MonoBehaviour
     protected float DepthMovementSpeed = 0;
 
     const float AutoKillDistance = 1000;
+    new Rigidbody rigidbody;
+    protected virtual void Awake() 
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
     
     protected void RotateCCW()
     {
-        transform.Rotate(0, 0, -AngularMovementSpeed * Time.deltaTime);
+        rigidbody.MoveRotation(transform.rotation * Quaternion.Euler(0, 0, -AngularMovementSpeed * Time.fixedDeltaTime));
     }
 
     protected void RotateCW()
     {
-        transform.Rotate(0, 0, AngularMovementSpeed * Time.deltaTime);
+        rigidbody.MoveRotation(transform.rotation * Quaternion.Euler(0, 0, AngularMovementSpeed * Time.fixedDeltaTime));
     }
 
-    protected virtual void Update() 
+    protected virtual void FixedUpdate() 
     {
-        transform.position += Vector3.forward * DepthMovementSpeed;
+        rigidbody.MovePosition(transform.position + Vector3.forward * DepthMovementSpeed * Time.fixedDeltaTime);
 
         if (transform.position.z >= AutoKillDistance || transform.position.z <= -AutoKillDistance)
             Destroy(gameObject);
