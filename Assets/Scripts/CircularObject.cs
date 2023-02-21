@@ -12,15 +12,15 @@ public class CircularObject : MonoBehaviour
     
     protected void RotateCCW()
     {
-        transform.Rotate(0, 0, AngularMovementSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, -AngularMovementSpeed * Time.deltaTime);
     }
 
     protected void RotateCW()
     {
-        transform.Rotate(0, 0, -AngularMovementSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, AngularMovementSpeed * Time.deltaTime);
     }
 
-    private void Update() 
+    protected virtual void Update() 
     {
         transform.position += Vector3.forward * DepthMovementSpeed;
     }

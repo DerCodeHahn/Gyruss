@@ -26,7 +26,7 @@ public class Ship : CircularObject
     }
 
 
-    void Update()
+    protected override void Update()
     {
         ReadUserInput();
 
