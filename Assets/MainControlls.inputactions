@@ -1,0 +1,60 @@
+{
+    "name": "MainControlls",
+    "maps": [
+        {
+            "name": "Keyboard",
+            "id": "007cf7d4-64ec-4c49-b7b6-8a5fd0e8a205",
+            "actions": [
+                {
+                    "name": "MoveCW",
+                    "type": "Button",
+                    "id": "f1110fb8-91d0-43e7-9cde-b5518440a178",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveCCW",
+                    "type": "Button",
+                    "id": "f0d50912-94cf-4652-9727-db0388651858",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "719a22fd-b750-4cc7-bb68-c10ce66d9486",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCW",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62c47867-112b-45d8-8630-fd9cd66d1438",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCCW",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": []
+        }
+    ]
+}
