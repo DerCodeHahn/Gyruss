@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 887170280}
   - component: {fileID: 887170281}
   m_Layer: 0
-  m_Name: CenterAnchor
+  m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,9 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fd5798211b20c4090e33ee44087e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 80
+  AngularMovementSpeed: 80
+  DepthMovementSpeed: 0
   MoveCW: {fileID: 4385671469013508435, guid: a7114c5837f18f6499878548715f9c38, type: 3}
   MoveCCW: {fileID: -241250039870365109, guid: a7114c5837f18f6499878548715f9c38, type: 3}
+  ShootInput: {fileID: 7019003252137565804, guid: a7114c5837f18f6499878548715f9c38, type: 3}
+  ShotPrefab: {fileID: 202649603337515594, guid: f513b380a67326d49964c015530b5b43, type: 3}
+  shootingSpeed: 0.2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,14 +379,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861785118}
-  m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.25581974, y: 0.00043418817, z: -0.00094953325, w: 0.966724}
   m_LocalPosition: {x: 0, y: -4.02, z: 0}
   m_LocalScale: {x: 0.29289, y: 0.14256714, z: 0.88678306}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 887170280}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -29.644, y: 0.087, z: -0.136}
 --- !u!65 &1861785120
 BoxCollider:
   m_ObjectHideFlags: 0
