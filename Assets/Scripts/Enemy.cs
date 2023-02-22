@@ -12,6 +12,8 @@ public class Enemy : CircularObject
     [SerializeField] AnimationCurve PointsDistanceMapping;
     [SerializeField] int MaxPoints = 1000;
 
+    [SerializeField] Transform bodyPosition;
+
     private void Awake()
     {
         base.Awake();
@@ -42,7 +44,7 @@ public class Enemy : CircularObject
 
         //Debug.Log($"Killed at Distance {amountTraveld} Got {currentPoints} Points");
 
-        ScoreManager.Instance.AddScore(currentPoints);
+        ScoreManager.Instance.AddScore((int)currentPoints, bodyPosition.position );
     }
 
     protected override void FixedUpdate()
