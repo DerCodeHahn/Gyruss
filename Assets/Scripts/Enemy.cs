@@ -13,7 +13,7 @@ public class Enemy : CircularObject
     [SerializeField] int MaxPoints = 1000;
 
     [SerializeField] Transform bodyPosition;
-
+    bool dead = false;
     private void Awake()
     {
         base.Awake();
@@ -23,6 +23,9 @@ public class Enemy : CircularObject
 
     private void OnCollisionEnter(Collision other)
     {
+        if(dead)
+            return;
+            
         Shot shot = other.gameObject.GetComponent<Shot>();
 
         if (shot is not null)
@@ -38,6 +41,7 @@ public class Enemy : CircularObject
     void KillEnemy()
     {
         Destroy(gameObject);
+        dead = true;
 
         float amountTraveld =  transform.position.z / transform.parent.position.z;
         float currentPoints = PointsDistanceMapping.Evaluate(1-amountTraveld) * MaxPoints;
