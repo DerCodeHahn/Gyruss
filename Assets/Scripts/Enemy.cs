@@ -14,7 +14,10 @@ public class Enemy : CircularObject
 
     [SerializeField] Transform bodyPosition;
     bool dead = false;
-    private void Awake()
+
+    public bool Dead { get => dead; set => dead = value; }
+
+    protected override void Awake()
     {
         base.Awake();
         transform.localScale = Vector3.zero;
@@ -23,9 +26,9 @@ public class Enemy : CircularObject
 
     private void OnCollisionEnter(Collision other)
     {
-        if(dead)
+        if (dead)
             return;
-            
+
         Shot shot = other.gameObject.GetComponent<Shot>();
 
         if (shot is not null)
@@ -33,7 +36,7 @@ public class Enemy : CircularObject
             health -= shot.Damage;
             if (health <= 0)
                 KillEnemy();
-            
+
             Destroy(shot.gameObject);
         }
     }
@@ -43,19 +46,20 @@ public class Enemy : CircularObject
         Destroy(gameObject);
         dead = true;
 
-        float amountTraveld =  transform.position.z / transform.parent.position.z;
-        float currentPoints = PointsDistanceMapping.Evaluate(1-amountTraveld) * MaxPoints;
+        float amountTraveld = transform.position.z / transform.parent.position.z;
+        float currentPoints = PointsDistanceMapping.Evaluate(1 - amountTraveld) * MaxPoints;
 
         //Debug.Log($"Killed at Distance {amountTraveld} Got {currentPoints} Points");
 
-        ScoreManager.Instance.AddScore((int)currentPoints, bodyPosition.position );
+        ScoreManager.Instance.AddScore((int)currentPoints, bodyPosition.position);
+        CameraShaker.Instance.Shake(CameraShaker.ShakeIntensity.Medium);
     }
 
     protected override void FixedUpdate()
     {
         RotateCCW();
         base.FixedUpdate();
-        
+
     }
 
     private void OnDestroy()

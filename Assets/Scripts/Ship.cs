@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class Ship : CircularObject
@@ -13,7 +14,10 @@ public class Ship : CircularObject
     [SerializeField] GameObject ShotPrefab;
     [SerializeField] Transform ShotsParent;
 
-    [SerializeField] float shootingSpeed;
+    [SerializeField] float ShootingSpeed;
+    [SerializeField] int Lives = 3;
+
+    [SerializeField] LiveManager LiveManger;
 
     float shotTimer;
     bool shooting = false;
@@ -23,6 +27,8 @@ public class Ship : CircularObject
         MoveCW.action.Enable();
         MoveCCW.action.Enable();
         ShootInput.action.Enable();
+
+        LiveManger.SetLives(Lives);
     }
 
 
@@ -31,7 +37,7 @@ public class Ship : CircularObject
         ReadUserInput();
 
         shotTimer += Time.deltaTime;
-        if (shotTimer >= shootingSpeed && shooting)
+        if (shotTimer >= ShootingSpeed && shooting)
         {
             Shoot();
             shotTimer = 0;
@@ -54,5 +60,28 @@ public class Ship : CircularObject
     {
         GameObject shot = Instantiate(ShotPrefab, ShotsParent);
         shot.transform.rotation = transform.rotation;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemy enemy = other.transform.parent.GetComponent<Enemy>();
+        if (enemy is null || enemy.Dead)
+            return;
+
+        enemy.Dead = true;
+
+        Destroy(other.transform.parent.gameObject);
+
+        CameraShaker.Instance.Shake(CameraShaker.ShakeIntensity.Intense);
+
+        Lives--;
+        LiveManger.RemoveOne();
+
+        if (Lives <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+
+
     }
 }

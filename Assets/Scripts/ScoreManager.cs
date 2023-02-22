@@ -7,19 +7,22 @@ using DG.Tweening;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
+    static int score;
 
     [SerializeField] GameObject ScorePrefab;
 
     TextMeshProUGUI text;
 
-    float score = 0;
     Camera mainCamera;
+
+    public static int Score { get => score;}
 
     private void Awake()
     {
         Instance = this;
         text = GetComponent<TextMeshProUGUI>();
         mainCamera = Camera.main;
+        score = 0;
     }
 
 
