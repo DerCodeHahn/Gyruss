@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     TextMeshProUGUI text;
 
     Camera mainCamera;
+    public float LevelScoreBooster = 1;
 
     public static int Score { get => score;}
 
@@ -28,6 +29,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int points, Vector3 position)
     {
+        points = (int)(points * LevelScoreBooster);
         score += points;
         CreateOnScreenPoints(points, position);
         UpdateScore();

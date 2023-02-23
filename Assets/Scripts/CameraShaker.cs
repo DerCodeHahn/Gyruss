@@ -11,10 +11,18 @@ public class CameraShaker : MonoBehaviour
         Medium,
         Intense
     }
+    
     public static CameraShaker Instance;
+    Camera camera;
+    float defaultFov;
+    [SerializeField] float duration = 1;
+    [SerializeField] AnimationCurve fieldOfViewChange;
+
     private void Awake()
     {
         Instance = this;
+        camera = GetComponent<Camera>();
+        defaultFov = camera.fieldOfView;
     }
 
     public void Shake(ShakeIntensity shakeIntensity)
@@ -29,7 +37,6 @@ public class CameraShaker : MonoBehaviour
                 break;
             case ShakeIntensity.Intense:
                 transform.DOShakePosition(1, 1);
-
                 break;
             default:
                 break;
@@ -40,5 +47,14 @@ public class CameraShaker : MonoBehaviour
     {
         // Dont generate errors when changing scenes
         transform.DOKill();
+    }
+
+    public void ChangeLevel()
+    {
+        DOVirtual.Float(0, 1, duration, (x) =>
+        {
+            camera.fieldOfView = fieldOfViewChange.Evaluate(x);
+        });
+
     }
 }
